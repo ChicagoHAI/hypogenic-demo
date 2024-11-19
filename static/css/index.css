@@ -148,3 +148,11 @@ body {
   font-weight: bold;
   color: #4a4a4a; /* Match light mode color scheme */
 }
+
+.subtitle-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #4a4a4a;
+}
