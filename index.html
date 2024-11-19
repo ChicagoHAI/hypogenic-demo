@@ -191,7 +191,7 @@ End teaser video -->
         <div class="hero-body">
           <div class="level-set has-text-justified">
             <p>
-              Hypothesis generation is a pivotal yet underexplored step in scientific discovery. Current approaches fall into two main categories:
+              Hypothesis generation is a critical yet understudied step in scientific discoveries. Current approaches fall into two main categories:
             </p>
             <ul>
               <li><strong>Theory-driven methods:</strong> Utilize literature to propose hypotheses grounded in established human knowledge. However, they lack adaptability to new data.</li>
@@ -203,13 +203,57 @@ End teaser video -->
         </div>
         <img src="static/images/hypothesis-agent_figure1.jpg" alt="Our hypothesis generation framework"/>
         <h2 class="subtitle has-text-centered">
-          Figure 1: Illustration of how we combine literature-based and data-driven hypotheses. See algorithmic details in section 2 of our paper.
+          Illustration of how we combine literature-based and data-driven hypotheses. See algorithmic details in section 2 of our paper.
         </h2>
         </div>
       </div>
     </div>
   </div>
 </div>
+</section>
+
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Data-driven Hypothesis Generation</h2>
+      <div class="level-set has-text-justified">
+        <p>
+          Our data-driven hypothesis generation is based on the HYPOGENIC framework <cite>Zhou et al., 2024</cite>. The process includes two key stages:
+        </p>
+        <ul>
+          <li>
+            <strong>Initialization:</strong> A large language model (LLM) is prompted with an initial set of data instances, 
+            <code>&#x1D53C;<sub>init</sub></code>, from the training set <code>&#x1D53C;</code>. The LLM generates initial hypotheses to form the hypothesis bank 
+            <code>&#x1D53C;<sub>&#x1D53C;</sub></code>.
+          </li>
+          <li>
+            <strong>Update:</strong> For each data example <code>s &isin; &#x1D53C;</code>, the top <code>k</code> high-reward hypotheses from 
+            <code>&#x1D53C;<sub>&#x1D53C;</sub></code> are selected to prompt the LLM to make predictions. The accuracy and reward of the <code>k</code> hypotheses are updated based on their performance. If at least 
+            <code>w<sub>hyp</sub></code> hypotheses fail to predict correctly for <code>s</code>, <code>s</code> is added to a "wrong examples pool" <code>&#x1D53C;</code>. When the size of <code>&#x1D53C;</code> reaches <code>w<sub>max</sub></code>, new hypotheses are generated and added to <code>&#x1D53C;<sub>&#x1D53C;</sub></code>.
+          </li>
+        </ul>
+        <p>
+          The reward mechanism is inspired by the Upper Confidence Bound (UCB) algorithm <cite>Auer, 2003</cite>, with the reward function defined as:
+        </p>
+        <pre>
+        <code>
+        r<sub>i</sub> = ( ∑ (x<sub>j</sub>, y<sub>j</sub>) ∈ &#x1D540;<sub>i</sub> I(y<sub>j</sub> = &#x005E;y<sub>j</sub>) / |&#x1D540;<sub>i</sub>| )
+             + α√(log(t) / |&#x1D540;<sub>i</sub>|)
+        </code>
+        </pre>
+        <p>
+          Here, <code>&#x1D540;<sub>i</sub></code> represents the examples used to evaluate hypothesis <code>h<sub>i</sub></code>, <code>t</code> is the training time step, and <code>α</code> controls the exploration term.
+        </p>
+     </div>
+     <img src="static/images/hypogenic_figure1.jpg" alt="HypoGeniC figure" class="blend-img-background center-image"/>
+          <p>Illustration of <strong>HypoGeniC</strong>. During update stage, we evaluate the top k hypotheses on each
+            new training example and update the reward based on the prediction correctness. If the number of
+            hypotheses that got the example wrong exceeds a certain threshold, we add the example to a wrong
+            example bank. The wrong example bank is then used to generate new hypotheses
+      </div>
+   </div>
+ </div>
 </section>
 
 
