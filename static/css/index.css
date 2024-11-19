@@ -142,4 +142,9 @@ body {
   text-decoration: underline;
 }
 
-
+.subtitle.is-4 {
+  margin-top: 1rem; /* Space above the header */
+  margin-bottom: 0.5rem; /* Reduce gap between header and text */
+  font-weight: bold;
+  color: #4a4a4a; /* Match light mode color scheme */
+}

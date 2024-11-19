@@ -237,7 +237,7 @@ End teaser video -->
           <p>Illustration of <strong><a href="https://arxiv.org/abs/2404.04326" target="_blank" class="blue-link">HypoGeniC</a></strong>. During update stage, we evaluate the top k hypotheses on each
             new training example and update the reward based on the prediction correctness. If the number of
             hypotheses that got the example wrong exceeds a certain threshold, we add the example to a wrong
-            example bank. The wrong example bank is then used to generate new hypotheses
+            example bank. The wrong example bank is then used to generate new hypotheses.
       </div>
    </div>
  </div>
@@ -265,33 +265,117 @@ End teaser video -->
     </div>
   </section>
 
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Integration of Literature-Based and Data-Driven Hypotheses</h2>
+        <div class="level-set has-text-justified">
+          <p>
+            A key contribution of our work is the integration of literature-based and data-driven hypothesis generation. This approach combines the strengths of both methods to enhance the generalizability and utility of generated hypotheses. We employ two strategies:
+          </p>
+          
+          <div class="subtitle-header"><strong>Refinement of Literature-Based Hypotheses</strong></div>
+          <p>
+            The <strong>refinement method</strong> integrates paper summaries with <a href="https://arxiv.org/abs/2404.04326" target="_blank" class="blue-link">HypoGeniC</a>. During initialization, an LLM generates hypotheses based on both initial data examples and relevant paper summaries.
+          </p>
+          <p>
+            In the update stage, hypotheses generated from challenging examples are refined iteratively by data-driven and literature-based refinement agents. This iterative process ensures the hypotheses incorporate both empirical patterns and key insights from the literature. After multiple rounds of refinement, the final hypothesis bank is returned to the HypoGeniC pipeline for further use.
+          </p>
+      
+          <div class="subtitle-header"><strong>Union and Redundancy Elimination</strong></div>
+          <p>
+            To address the potential undervaluation of literature-based hypotheses, we employ a union strategy. Two hypothesis banks are created: one from literature-based methods and the other using HypoGeniC or the refinement method. A redundancy checker removes similar or repetitive hypotheses, and the final hypothesis bank is constructed by selecting a balanced mix of hypotheses from both sources. This ensures a comprehensive and diverse set of hypotheses for further evaluation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="section hero is-small">
+<div class="container is-max-desktop">
+  <div class="columns is-centered">
+    <div class="column is-full">
+      <div class="content">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="level-set has-text-justified">
+          <p>
+            The experiments were designed to evaluate the utility and novelty of the proposed hypothesis generation methods. Evaluations were conducted using both automatic and human frameworks across multiple tasks.
+          </p>
+          
+          <h3 class="subtitle is-4">Evaluation Framework</h3>
+          <ul>
+            <li>
+              <strong>Automatic Evaluation:</strong> Measured performance on in-distribution (IND) and out-of-distribution (OOD) datasets using metrics like accuracy and F1 scores. Hypotheses were used as prompts for large language models (LLMs).
+            </li>
+            <li>
+              <strong>Human Evaluation:</strong> Participants rated the practical utility and novelty of generated hypotheses. Studies were conducted on tasks such as Deception Detection and AI-Generated Content (AIGC) Detection.
+            </li>
+          </ul>
+  
+          <h3 class="subtitle is-4">Tasks</h3>
+          <ul>
+            <li><strong>Deception Detection:</strong> Differentiating truthful and deceptive hotel reviews.</li>
+            <li><strong>AI-Generated Content Detection:</strong> Identifying whether stories were written by AI or humans.</li>
+            <li><strong>Mental Stress Detection:</strong> Analyzing Reddit posts for signs of stress.</li>
+            <li><strong>Persuasive Argument Prediction:</strong> Determining which arguments are more persuasive in pairs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
 
 <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <h2 class="title is-3">Integration of Literature-Based and Data-Driven Hypotheses</h2>
+      <h2 class="title is-3">Results</h2>
       <div class="level-set has-text-justified">
         <p>
-          A key contribution of our work is the integration of literature-based and data-driven hypothesis generation. This approach combines the strengths of both methods to enhance the generalizability and utility of generated hypotheses. We employ two strategies:
+          The results demonstrate the effectiveness of integrating literature-based and data-driven hypothesis generation methods.
         </p>
         
-        <div class="subtitle-header">Refinement of Literature-Based Hypotheses</div>
+        <h3 class="subtitle is-4">Automatic Evaluation</h3>
         <p>
-          The <strong>refinement method</strong> integrates paper summaries with <a href="https://arxiv.org/abs/2404.04326" target="_blank" class="blue-link">HypoGeniC</a>. During initialization, an LLM generates hypotheses based on both initial data examples and relevant paper summaries.
+          Combining literature-based and data-driven methods produced the best performance across tasks. The integrated approach improved accuracy by up to 11.92% over few-shot inference and by 16.54% over literature-only methods.
         </p>
         <p>
-          In the update stage, hypotheses generated from challenging examples are refined iteratively by data-driven and literature-based refinement agents. This iterative process ensures the hypotheses incorporate both empirical patterns and key insights from the literature. After multiple rounds of refinement, the final hypothesis bank is returned to the HypoGeniC pipeline for further use.
+          The HYPOGENIC framework showed significant advantages over zero-shot and literature-based methods, particularly in handling OOD datasets.
         </p>
-    
-        <div class="subtitle-header">Union and Redundancy Elimination</div>
+        
+        <h3 class="subtitle is-4">Human Evaluation</h3>
         <p>
-          To address the potential undervaluation of literature-based hypotheses, we employ a union strategy. Two hypothesis banks are created: one from literature-based methods and the other using HypoGeniC or the refinement method. A redundancy checker removes similar or repetitive hypotheses, and the final hypothesis bank is constructed by selecting a balanced mix of hypotheses from both sources. This ensures a comprehensive and diverse set of hypotheses for further evaluation.
+          Hypotheses generated through the integrated approach enhanced human decision-making in tasks like Deception Detection and AIGC Detection. Literature-based hypotheses provided unique, complementary insights, further demonstrating the value of combining literature and data-driven approaches.
         </p>
+        <img src="static/images/hypothesis-agent_table1.png" alt="OOD main results"/>
+        <h2 class="subtitle has-text-centered">
+          Illustration of how we combine literature-based and data-driven hypotheses. See algorithmic details in section 2 of our paper.
+        </h2>
       </div>
     </div>
   </div>
 </section>
 
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Broader Impact</h2>
+      <div class="level-set has-text-justified">
+        <p>
+          This work uncovers a significant vulnerability in fine-tuned models, allowing attackers to access pre-fine-tuning weights. While this discovery reveals potential security risks, our primary objective is to advance the field of Machine Learning and raise awareness within the research community about the existing vulnerabilities in current models.
+        </p>
+        <p>
+          Instead of using the findings of this study to execute attacks, we advocate for their use by model creators to enhance the safety and security of their models. By acknowledging and addressing vulnerabilities, creators can proactively safeguard against potential threats.
+        </p>
+        <p>
+          Furthermore, in the discussion section, we outline potential future directions and mitigation strategies. Following established practices in the cyber security community, we emphasize the importance of open discussion and encourage the reporting of vulnerabilities. By fostering transparency and collaboration, we can collectively create a safer environment for deploying machine learning models.
+       </p>
+     </div>
+   </div>
+ </div>
+</section>
 
 <!-- Image carousel
 <section class="hero is-small">
