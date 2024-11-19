@@ -134,7 +134,11 @@ body {
 }
 
 .blue-link {
-  color: blue;
+  color: hsl(204, 86%, 53%) !important;
+}
+
+/* Add underline on hover */
+.blue-link:hover {
   text-decoration: underline;
 }
 
