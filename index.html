@@ -219,35 +219,22 @@ End teaser video -->
       <h2 class="title is-3">Data-driven Hypothesis Generation</h2>
       <div class="level-set has-text-justified">
         <p>
-          Our data-driven hypothesis generation is based on the HYPOGENIC framework <cite>Zhou et al., 2024</cite>. The process includes two key stages:
+          Our data-driven hypothesis generation is based on the <a href="https://arxiv.org/abs/2404.04326" target="_blank">HypoGeniC</a> framework. The process involves two main stages:
         </p>
         <ul>
           <li>
-            <strong>Initialization:</strong> A large language model (LLM) is prompted with an initial set of data instances, 
-            <code>&#x1D53C;<sub>init</sub></code>, from the training set <code>&#x1D53C;</code>. The LLM generates initial hypotheses to form the hypothesis bank 
-            <code>&#x1D53C;<sub>&#x1D53C;</sub></code>.
+            <strong>Initialization:</strong> The model generates an initial set of hypotheses using a small subset of data. These hypotheses form the basis for further refinement.
           </li>
           <li>
-            <strong>Update:</strong> For each data example <code>s &isin; &#x1D53C;</code>, the top <code>k</code> high-reward hypotheses from 
-            <code>&#x1D53C;<sub>&#x1D53C;</sub></code> are selected to prompt the LLM to make predictions. The accuracy and reward of the <code>k</code> hypotheses are updated based on their performance. If at least 
-            <code>w<sub>hyp</sub></code> hypotheses fail to predict correctly for <code>s</code>, <code>s</code> is added to a "wrong examples pool" <code>&#x1D53C;</code>. When the size of <code>&#x1D53C;</code> reaches <code>w<sub>max</sub></code>, new hypotheses are generated and added to <code>&#x1D53C;<sub>&#x1D53C;</sub></code>.
+            <strong>Update:</strong> Hypotheses are iteratively refined based on their performance. Poorly performing hypotheses are replaced with new ones generated from challenging examples, ensuring continuous improvement.
           </li>
         </ul>
         <p>
-          The reward mechanism is inspired by the Upper Confidence Bound (UCB) algorithm <cite>Auer, 2003</cite>, with the reward function defined as:
-        </p>
-        <pre>
-        <code>
-        r<sub>i</sub> = ( ∑ (x<sub>j</sub>, y<sub>j</sub>) ∈ &#x1D540;<sub>i</sub> I(y<sub>j</sub> = &#x005E;y<sub>j</sub>) / |&#x1D540;<sub>i</sub>| )
-             + α√(log(t) / |&#x1D540;<sub>i</sub>|)
-        </code>
-        </pre>
-        <p>
-          Here, <code>&#x1D540;<sub>i</sub></code> represents the examples used to evaluate hypothesis <code>h<sub>i</sub></code>, <code>t</code> is the training time step, and <code>α</code> controls the exploration term.
+          This iterative approach improves the quality and adaptability of hypotheses by leveraging both the initial data patterns and feedback from challenging cases.
         </p>
      </div>
      <img src="static/images/hypogenic_figure1.jpg" alt="HypoGeniC figure" class="blend-img-background center-image"/>
-          <p>Illustration of <strong>HypoGeniC</strong>. During update stage, we evaluate the top k hypotheses on each
+          <p>Illustration of <strong><a href="https://arxiv.org/abs/2404.04326" target="_blank">HypoGeniC</a></strong>. During update stage, we evaluate the top k hypotheses on each
             new training example and update the reward based on the prediction correctness. If the number of
             hypotheses that got the example wrong exceeds a certain threshold, we add the example to a wrong
             example bank. The wrong example bank is then used to generate new hypotheses
@@ -257,6 +244,84 @@ End teaser video -->
 </section>
 
 
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3">Vulnerability of SoTA Models</h2>
+          <div class="level-set has-text-justified">
+            <p>
+              By using just 5 LoRAs taken from CivitAI, we can recover the Pre-FT Stable Diffusion weights with a vanishingly small error. As can be seen below, scaling up to a DPO aligned Mistral only requires 8 LoRAs.
+            </p>
+            <img src="static/images/semantic_conv.png" alt="Number of LoRAs for semantic convergence" class="center-image"/>
+            <div class="container mt-4">
+              <div class="alert alert-danger" role="alert">
+                <strong>Implications:</strong> SoTA LLMs that use LoRA for alignment fine-tuning are vulnerable to Pre-FT weight recovery attacks
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Spectral DeTuning</h2>
+      <div class="level-set has-text-justified">
+        <p>
+          The core idea of Spectral DeTuning is to iteratively break down the optimization into a set of simple sub-problems which have closed-form solutions. This results in a simple yet powerful algorithm that can be implemented in 8 lines of code.
+       </p>
+       <img src="static/images/algorithm.png" alt="Spectral DeTuning code" class="center-image"/>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3">LoWRA Bench</h2>
+          <div class="level-set has-text-justified">
+            <p>
+              To stimulate research into preventing Pre-FT weight leakage and the associated risks in terms of model safety and alignment we present <strong>Lo</strong>RA <strong>W</strong>eight <strong>R</strong>ecovery <strong>A</strong>ttack (LoWRA) Bench, a comprehensive benchmark designed to evaluate Pre-FT weight recovery methods.<br>
+
+              Our dataset encompasses three pre-trained representative source models: a Vision Transformer (ViT) trained on ImageNet-1K, Stable Diffusion 1.5, and Mistral-7B-v0.1. Notably, these models are widely used and deployed in numerous production systems.
+
+            </p>
+            <img src="static/images/lowra_bench.png" alt="LoWRA Bench Details" class="center-image"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container  is-max-desktop">
+      <h2 class="title is-3">Broader Impact</h2>
+      <div class="level-set has-text-justified">
+        <p>
+          This work uncovers a significant vulnerability in fine-tuned models, allowing attackers to access pre-fine-tuning weights. While this discovery reveals potential security risks, our primary objective is to advance the field of Machine Learning and raise awareness within the research community about the existing vulnerabilities in current models.
+        </p>
+        <p>
+          Instead of using the findings of this study to execute attacks, we advocate for their use by model creators to enhance the safety and security of their models. By acknowledging and addressing vulnerabilities, creators can proactively safeguard against potential threats.
+        </p>
+        <p>
+          Furthermore, in the discussion section, we outline potential future directions and mitigation strategies. Following established practices in the cyber security community, we emphasize the importance of open discussion and encourage the reporting of vulnerabilities. By fostering transparency and collaboration, we can collectively create a safer environment for deploying machine learning models.
+       </p>
+     </div>
+   </div>
+ </div>
+</section>
 
 <!-- Image carousel
 <section class="hero is-small">
