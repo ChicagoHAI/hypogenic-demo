@@ -268,14 +268,14 @@ End teaser video -->
 
 <section class="hero is-small is-light">
   <div class="hero-body">
-    <div class="container  is-max-desktop">
-      <h2 class="title is-3">Integration of Literature-based and Data-driven Hypotheses</h2>
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Integration of Literature-Based and Data-Driven Hypotheses</h2>
       <div class="level-set has-text-justified">
         <p>
           A key contribution of our work is the integration of literature-based and data-driven hypothesis generation. This approach combines the strengths of both methods to enhance the generalizability and utility of generated hypotheses. We employ two strategies:
         </p>
         
-        <h3 class="subtitle is-4">Refinement of Literature-Based Hypotheses</h3>
+        <div class="subtitle-header">Refinement of Literature-Based Hypotheses</div>
         <p>
           The <strong>refinement method</strong> integrates paper summaries with <a href="https://arxiv.org/abs/2404.04326" target="_blank" class="blue-link">HypoGeniC</a>. During initialization, an LLM generates hypotheses based on both initial data examples and relevant paper summaries.
         </p>
@@ -283,13 +283,13 @@ End teaser video -->
           In the update stage, hypotheses generated from challenging examples are refined iteratively by data-driven and literature-based refinement agents. This iterative process ensures the hypotheses incorporate both empirical patterns and key insights from the literature. After multiple rounds of refinement, the final hypothesis bank is returned to the HypoGeniC pipeline for further use.
         </p>
     
-        <h3 class="subtitle is-4">Union and Redundancy Elimination</h3>
+        <div class="subtitle-header">Union and Redundancy Elimination</div>
         <p>
           To address the potential undervaluation of literature-based hypotheses, we employ a union strategy. Two hypothesis banks are created: one from literature-based methods and the other using HypoGeniC or the refinement method. A redundancy checker removes similar or repetitive hypotheses, and the final hypothesis bank is constructed by selecting a balanced mix of hypotheses from both sources. This ensures a comprehensive and diverse set of hypotheses for further evaluation.
         </p>
-     </div>
-   </div>
- </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
