@@ -291,9 +291,9 @@ End teaser video -->
             In the update stage, hypotheses generated from challenging examples are refined iteratively by data-driven and literature-based refinement agents. This iterative process ensures the hypotheses incorporate both empirical patterns and key insights from the literature. After multiple rounds of refinement, the final hypothesis bank is returned to the HypoGeniC pipeline for further use.
           </p>
           <img src="static/images/refine_figure.jpg" alt="refinement of hypotheses"/>
-          <h2 class="subtitle has-text-centered">
+          <p>
             Illustration of how we refine hypotheses using literature and data. See algorithmic details in section 2 of our paper.
-          </h2>
+          </p>
           <h3 class="subtitle is-4">Union and Redundancy Elimination</h3>
           <p>
             To address the potential undervaluation of literature-based hypotheses, we employ a union strategy. Two hypothesis banks are created: one from literature-based methods and the other using HypoGeniC or the refinement method. A redundancy checker removes similar or repetitive hypotheses, and the final hypothesis bank is constructed by selecting a balanced mix of hypotheses from both sources. This ensures a comprehensive and diverse set of hypotheses for further evaluation.
